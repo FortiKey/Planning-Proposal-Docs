@@ -78,23 +78,23 @@ Additionally, the platform offers a dashboard and API documentation to make inte
 ### Tech Stack:  
 
 - **Frontend:**
-    - `React.js` (for building the business dashboard with reusable components and responsive design).  
-    - `Axios` (for handling API requests between the dashboard and backend).  
+    - ***React.js*** (for building the business dashboard with reusable components and responsive design).  
+    - ***Axios*** (for handling API requests between the dashboard and backend).  
 
 - **Backend:**  
-    - `Node.js` with `Express` (to create scalable and secure API services).  
-    - `OTPAuth` (to handle TOTP generation and OTP validation).  
-    - Middleware `express-rate-limit` to secure APIs from abuse and brute force attacks.
+    - ***Node.js*** with ***Express*** (to create scalable and secure API services).  
+    - ***OTPAuth*** (to handle TOTP generation and OTP validation).  
+    - Middleware ***express-rate-limit*** to secure APIs from abuse and brute force attacks.
 
 - **Database:**  
-    - `MongoDB Atlas` (a cloud database solution to store business and user-related data, including *TOTP secrets and logs*).  
+    - ***MongoDB Atlas*** (a cloud database solution to store business and user-related data, including *TOTP secrets and logs*).  
 
 - **Authentication:**  
-    - `JSON Web Tokens (JWT)` for session and API authentication.  
+    - ***JSON Web Tokens (JWT)*** for session and API authentication.  
 
 - **Hosting:**  
-    - **Frontend:** `Netlify` (for fast, reliable, and secure static hosting).  
-    - **Backend:**  `Render` (to host backend services with scalability in mind).  
+    - **Frontend:** ***Netlify*** (for fast, reliable, and secure static hosting).  
+    - **Backend:**  ***Render*** (to host backend services with scalability in mind).  
 
 ### Additional Highlights:  
 1. **Scalability:**  
