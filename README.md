@@ -84,7 +84,10 @@ Additionally, the platform offers a dashboard and API documentation to make inte
 - **Backend:**  
     - ***Node.js*** with ***Express*** (to create scalable and secure API services).  
     - ***OTPAuth*** (to handle TOTP generation and OTP validation).  
-    - Middleware ***express-rate-limit*** to secure APIs from abuse and brute force attacks.
+    - **Middlewares:** 
+        - ***express-rate-limit*** to secure APIs from abuse and brute force attacks.  
+        - ***Helmet*** Enhances security by setting HTTP headers to protect against common vulnerabilities. 
+        - ***CORS*** Manages cross-origin resource sharing to allow secure communication between the frontend and backend.
 
 - **Database:**  
     - ***MongoDB Atlas*** (a cloud database solution to store business and user-related data, including *TOTP secrets and logs*).  
@@ -96,6 +99,12 @@ Additionally, the platform offers a dashboard and API documentation to make inte
     - **Frontend:** ***Netlify*** (for fast, reliable, and secure static hosting).  
     - **Backend:**  ***Render*** (to host backend services with scalability in mind).  
 
+- **Additional Tools and Libraries:**  
+    - ***Bcrypt*** Used to hash and securely store passwords in the database.  
+    - ***Dotenv:*** Manages environment variables for configuration (e.g., API keys, database credentials).  
+    - ***Winston:*** A logging library for tracking system activity, errors, and performance metrics.  
+    - ***Jest:*** A testing framework for writing unit and integration tests to ensure code reliability.  
+
 ### Additional Highlights:  
 1. **Scalability:**  
     - Designed to handle multiple businesses and their users with minimal latency.  
@@ -105,7 +114,11 @@ Additionally, the platform offers a dashboard and API documentation to make inte
     - Businesses can easily integrate the API into existing applications regardless of their tech stack.  
 
 3. **Ease of Use:** 
-    - Focused on delivering an intuitive dashboard and detailed API documentation to make integration effortless.
+    - Focused on delivering an intuitive dashboard and detailed API documentation to make integration effortless.  
+
+4. **Security:**  
+    - Sensitive data (e.g., passwords, API keys, TOTP secrets) is encrypted and stored securely.
+    - Rate limiting and monitoring tools prevent abuse and ensure system performance.
 
 - [Back to Top](#table-of-contents)  
 
