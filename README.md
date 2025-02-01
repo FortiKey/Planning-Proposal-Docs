@@ -154,4 +154,16 @@ The database, built with **MongoDB Atlas**, stores all persistent data for the a
 
 ## Trello Board
 
+![Trello board Start](docs/TrelloW1-1.png)  
+
+![Trello card Screenshots](docs/TrelloW1-2.png)   
+
+![Trello card Description](docs/TrelloW1-3.png)  
+
+![Trello card AAD](docs/TrelloW1-4.png)  
+
+![Trello card DFD](docs/TrelloW1-5.png)  
+
+![Trello card midway through](docs/TrelloW1-6.png)
+
 - [Back to Top](#table-of-contents)
