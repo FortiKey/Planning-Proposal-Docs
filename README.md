@@ -62,7 +62,7 @@ Additionally, the platform offers a dashboard and API documentation to make inte
 ### Target Audience:
 1. **Small-to-Medium Businesses:**  
     - Companies looking for a simple, plug-and-play 2FA solution to enhance their platform's security.  
-    - Businesses that don’t have the technical bandwidth to build a custom 2FA solution.  
+    - Businesses that don't have the technical bandwidth to build a custom 2FA solution.  
 
 2. **Developers:**  
     - Developers tasked with adding 2FA functionality to a business's existing applications.  
@@ -114,6 +114,20 @@ Additionally, the platform offers a dashboard and API documentation to make inte
 - [Back to Top](#table-of-contents)  
 
 ## Application Architecture Diagram
+
+![Application Architecture Diagram](<docs/Application Architecture Diagram_.drawio.png>)
+
+### 1. Frontend (React.js App)
+The frontend is a **React.js application** to be deployed on **Netlify** that serves as the user interface for businesses.  It includes a **Business Dashboard** where businesses can register, log in, manage API keys, and view usage analytics.  Additionally, it provides **API Documentation** for developers to intergrate the 2FA API into their applications.  The frontend communicates with the backend via REST API calls to handle business operations and display relevant data.  Building with **Axios** for efficient API requests and **React Router** for seamless navigation, the frontend ensures a responsive and intuitive experience across devices.  
+
+### 2. Backend (Express.js App)  
+The backend is an **Express.js Application** that handles all user/business logic and API requests.  It will be deployed on **Render** and includes an **API Gateway** to manage incoming requests, enforce rate limiting, and route requests to the appropriate services.  The backend consists of several services: the **Business Service** for registration and API key management, the **TOTP Service** for QR code Generation and OTP validation, and the **Usage Logs Service** for tracking 2FA activity.  It interacts with the database to store and retrieve data and responds to requests from the frontend and external business applications.  Building with **Node.js**, the backend is scalable and secure, leveraging middleware like **express-rate-limit** and **Helmet** to protect against abuse and vulnerabilities.  
+
+### 3. Database (MongoDB Atlas)  
+The database, built with **MongoDB Atlas**, stores all persistent data for the application. It includes two main collections: the **Business Collection**, which stores business account details, API keys, and usage logs, and the **TOTP Secrets Collection**, which stores encrypted TOTP secrets and backup codes for end users. The database communicates with the backend to provide data for business operations, TOTP management, and usage analytics. MongoDB Atlas ensures high availability, scalability, and security, making it an ideal choice for handling sensitive data like TOTP secrets and business information.  
+
+### 4. Business Applications  
+**Business Applications** are external systems developed by businesses that integrate the 2FA API. These applications interact with the backend to provide 2FA functionality to their end users. They request QR codes for TOTP setup, send OTPs for validation, and handle user interactions (e.g., displaying QR codes and prompting for OTPs). The backend processes these requests and returns the necessary data (e.g., QR codes, validation results) to ensure secure authentication. The API is designed to be **tech stack-agnostic**, allowing businesses to integrate 2FA seamlessly into their existing applications, regardless of their programming language or framework.
 
 - [Back to Top](#table-of-contents)  
 
