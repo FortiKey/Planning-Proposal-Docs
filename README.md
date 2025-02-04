@@ -124,6 +124,13 @@ Additionally, the platform offers a dashboard and API documentation to make inte
 
 ## 	Dataflow Diagram
 
+![Dataflow Diagram level 0](docs/Level-0-DFD.png)  
+
+![Dataflow Diagram level 1](docs/Level-1-DFD.png)  
+
+![Dataflow Diagram level 2](docs/Level-2-DFD.png)  
+
+
 - [Back to Top](#table-of-contents)  
 
 ## Application Architecture Diagram
