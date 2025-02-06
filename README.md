@@ -151,7 +151,58 @@ The database, built with **MongoDB Atlas**, stores all persistent data for the a
 
 - [Back to Top](#table-of-contents)  
 
-## User Stories
+## User Stories  
+
+### Freelance Developer Integrates 2FA for Client Projects  
+As a freelance developer building secure web applications for clients,
+I want to seamlessly integrate a reliable Two-Factor Authentication (2FA) system using an easy-to-implement API,
+So that I can enhance security for my clients' platforms and provide them with a trusted authentication solution.  
+
+#### Acceptance Criteria  
+1. ***API Integration***
+    - I can generate API keys to securely integrate 2FA into my client's application.  
+    - I can follow clear API documentation with example requests and responses.  
+    - I can test the 2FA system in a sandbox environment before deployment.  
+
+2. ***User Authentication***  
+    - I can generate QR codes for users to scan with a TOTP authenticator app.  
+    - I can validate OTP codes provided by users during login.  
+    - I can generate backup codes for users in case they lose access to their TOTP app.  
+
+3. ***Security & Best Practices***  
+    - API keys are securely generated and can be rotated or deactivated.  
+    - All sensitive authentication data is encrypted and never stored in plain text.  
+    - Rate limiting prevents brute-force attacks on OTP validation endpoints.  
+
+4. ***Monitoring & Debugging***   
+    - I can view logs of 2FA events, including failed and successful OTP validations.  
+    - I can access error messages and troubleshooting guides for integration issues.
+
+5. ***Deployment & Client Handoff***  
+    - I can provide my clients with a setup guide to enable 2FA on their platform. 
+    - I can monitor API usage and ensure smooth operation post-deployment.  
+
+### Business Admin Monitors 2FA Analytics & Manages API Keys
+As a business administrator responsible for security oversight,
+I want to monitor 2FA authentication analytics and manage API keys through the dashboard, so that I can track authentication trends, identify security risks, and ensure secure API integration.  
+
+#### Acceptance Criteria  
+
+1. ***API Key Management***  
+    - I can generate API keys for integrating 2FA with my platform.  
+    - I can revoke or regenerate API keys for security purposes.  
+    - I can see a list of all active API keys  
+
+2. ***2FA Analytics Dashboard***  
+    - I can view the total number of 2FA authentication attempts over time.  
+    - I can see a breakdown of successful vs. failed OTP validations.  
+    - I can filter authentication logs by date range.  
+    - I can download reports of 2FA activity for compliance and security audits.  
+
+3. ***Security Monitoring***  
+    - I can view trends in failed OTP attempts, helping identify possible brute-force attacks.  
+    - I can receive alerts for unusual spikes in failed 2FA authentication attempts.  
+
 
 - [Back to Top](#table-of-contents)  
 
