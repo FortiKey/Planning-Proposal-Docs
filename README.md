@@ -210,9 +210,18 @@ I want to monitor 2FA authentication analytics and manage API keys through the d
 
 - [Back to Top](#table-of-contents)  
 
-## Trello Board
+## Project Management
+### Why We Used Kanban in Trello  
+For this project, we used Trello with the Kanban methodology to streamline task management and keep the workflow organised.  Trello's visual board made it easy to track progress, assign tasks, and collaborate efficiently.
 
+By structuring our board with ***Backlog***, ***To Do***, ***Doing***, ***Peer Review***, ***Testing*** and ***Complete*** columns, we ensured that tasks moved smoothly through different stages.  This helped the team stay focused, identify bottlenecks early, and adjust priorities as needed.
+
+Kanban's flexibility and transparency allowed us to manage work efficiently while keeping everyone aligned on project goals.  Trello's simple drag-and-drop interface made it easy to update tasks, maintain visibility, and ensure steady progress throughout development.  
+
+
+### Week 1
 ![Trello board Start](docs/TrelloW1-1.png)  
+
 
 ![Trello card Screenshots](docs/TrelloW1-2.png)   
 
@@ -222,6 +231,14 @@ I want to monitor 2FA authentication analytics and manage API keys through the d
 
 ![Trello card DFD](docs/TrelloW1-5.png)  
 
-![Trello card midway through](docs/TrelloW1-6.png)
+![Trello cards midway through](docs/TrelloW1-6.png)
+
+### Week 2
+![Trello card User Stories](docs/TreloW2-1.png)   
+
+![Trello card Wireframes](docs/TreloW2-2.png)  
+
+![Trello cards end of week 2](docs/TreloW2-3.png)
+
 
 - [Back to Top](#table-of-contents)
