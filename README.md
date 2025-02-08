@@ -13,7 +13,7 @@
 - [Application Architecture Diagram](#application-architecture-diagram)
 - [User Stories](#user-stories)
 - [Wireframes](#wireframes)
-- [Trello Board](#trello-board)
+- [Project Management](#project-management)
 
 ### Team members
 
