@@ -264,7 +264,78 @@ so that I can protect my account from unauthorized access and ensure my data rem
 
 - [Back to Top](#table-of-contents)  
 
-## Wireframes 
+## Design 
+The goal of the UI was to promote a clean user-friendly and seamless navigation. For a business app focused on security, professionalism, and modernity, a blue + white + gray color scheme was appropriate. 
+
+### Design
+1. Headings, outlines and buttons: #007BFF
+2. Normal Text: #343A40
+3. Highlights: #F2F4F8
+4. Backgrounds: #FFFFFF
+5. Normal Font: Roboto
+6. Dashboard/headings Font: Montserrat
+
+### Logo
+![FortiKey Logo](docs/FortiKeyLogo.png)
+
+The logo design of a shield with a keyhole is inspired by core concepts of security, protection, and access control, which aligns perfectly with the purpose of this app. 
+
+### WireFrames
+The App will consist of 5 pages in total which will be responsive to Desktop and Mobile. Dashboard will be organised in Tabs.
+1. Landing 
+2. Login 
+3. Sign Up 
+4. QR Scan 
+5. Dashboard
+    - Dashboard Overview
+    - Accounts
+    - Usage Analytics
+    - API Documentation
+    - Manage API Key's
+    - Admin Dashboard
+
+#### Landing 
+Simple Landing Page that gives potential customers an overview of the app and ability to contact the sales team. 
+![Landing Page Desktop](./docs/Desktop%20Landing%20Page.png)
+![Landing Page Mobile](./docs/Mobile%20Landing%20Page.png)
+
+#### Login
+Easy to use Login Page using your company/business email address.
+![Login Desktop](./docs/Desktop%20Login.png)
+![Login Mobile](./docs/Mobile%20Login.png)
+
+#### Company Sign up
+Sign up using the QR Code.
+![Sign Up Desktop](./docs/Sign%20Up%20Desktop.png)
+![Sign Up Mobile](./docs/Sign%20Up%20Mobile.png)
+
+#### QR Scan
+Generated QR Codes.
+![QR Desktop](./docs/QR%20Desktop.png)
+![QR Mobile](./docs/QR%20Mobile.png)
+
+#### Dashboards
+***Dashboard Overview***
+Quick Overview of company stats.
+![Dashboard Overview](./docs/Dashboard%20Overview.png)
+***Accounts***
+View users in your own business.
+![Accounts](./docs/Accounts.png)
+***Usage Analytics***
+Access Usage Analytics
+![Usage Analytics](./docs/Usage%20Analytics.png)
+***API Documentation***
+Your guides for any API related tasks
+![API Documentation](./docs/API%20Documentation.png)
+***Manage API Key's***
+Manage your current keys.
+![Manage API Key's](./docs/Manage%20API%20KEY.png)
+
+***Admin Dashboard***
+Company Dashboard to view current businesses. The company will say administrator.
+![Admin Dashboard](./docs/Admin%20Dashboard.png)
+
+
 
 - [Back to Top](#table-of-contents)  
 
