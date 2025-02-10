@@ -12,7 +12,7 @@
 - [Dataflow Diagram](#dataflow-diagram)
 - [Application Architecture Diagram](#application-architecture-diagram)
 - [User Stories](#user-stories)
-- [Wireframes](#wireframes)
+- [Design](#design)
 - [Project Management](#project-management)
 
 ### Team members
@@ -347,10 +347,10 @@ By structuring our board with ***Backlog***, ***To Do***, ***Doing***, ***Peer R
 
 Kanban's flexibility and transparency allowed us to manage work efficiently while keeping everyone aligned on project goals.  Trello's simple drag-and-drop interface made it easy to update tasks, maintain visibility, and ensure steady progress throughout development.  
 
+* Trello board link - https://trello.com/b/L7dyKFHE/fortikey
 
 ### Week 1
 ![Trello board Start](docs/TrelloW1-1.png)  
-
 
 ![Trello card Screenshots](docs/TrelloW1-2.png)   
 
@@ -363,11 +363,15 @@ Kanban's flexibility and transparency allowed us to manage work efficiently whil
 ![Trello cards midway through](docs/TrelloW1-6.png)
 
 ### Week 2
-![Trello card User Stories](docs/TreloW2-1.png)   
+![Trello card User Stories](docs/TrelloW2-1.png)   
 
-![Trello card Wireframes](docs/TreloW2-2.png)  
+![Trello card Wireframes](docs/TrelloW2-2.png)  
 
-![Trello cards end of week 2](docs/TreloW2-3.png)
+![Trello cards end of week 2](docs/TrelloW2-3.png)  
 
+### Week 3 
+![Trello card Submitting Checklist](docs/TrelloW3-1.png)  
+
+![Trello cards end of project planning stage](docs/TrelloW3-2.png)
 
 - [Back to Top](#table-of-contents)
