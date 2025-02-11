@@ -78,26 +78,26 @@ Additionally, the platform offers a dashboard and API documentation to make inte
 ### Tech Stack:  
 
 - **Frontend:**
-    - ***React.js*** (for building the business dashboard with reusable components and responsive design).  
-    - ***Axios*** (for handling API requests between the dashboard and backend).  
+    - ***React.js*** for building the business dashboard with reusable components and responsive design.  
+    - ***Axios*** for handling API requests between the dashboard and backend.  
 
 - **Backend:**  
-    - ***Node.js*** with ***Express*** (to create scalable and secure API services).  
-    - ***OTPAuth*** (to handle TOTP generation and OTP validation).  
+    - ***Node.js*** with ***Express*** to create scalable and secure API services.  
+    - ***OTPAuth*** to handle TOTP generation and OTP validation.  
     - **Middlewares:** 
         - ***express-rate-limit*** to secure APIs from abuse and brute force attacks.  
         - ***Helmet*** Enhances security by setting HTTP headers to protect against common vulnerabilities. 
         - ***CORS*** Manages cross-origin resource sharing to allow secure communication between the frontend and backend.
 
 - **Database:**  
-    - ***MongoDB Atlas*** (a cloud database solution to store business and user-related data, including *TOTP secrets and logs*).  
+    - ***MongoDB Atlas*** a cloud database solution to store business and user-related data, including *TOTP secrets and logs*.  
 
 - **Authentication:**  
     - ***JSON Web Tokens (JWT)*** for session and API authentication.  
 
 - **Hosting:**  
-    - **Frontend:** ***Netlify*** (for fast, reliable, and secure static hosting).  
-    - **Backend:**  ***Render*** (to host backend services with scalability in mind).  
+    - **Frontend:** ***Netlify*** for fast, reliable, and secure static hosting.  
+    - **Backend:**  ***Render*** to host backend services with scalability in mind.  
 
 - **Additional Tools and Libraries:**  
     - ***Bcrypt*** Used to hash and securely store passwords in the database.  
@@ -124,9 +124,18 @@ Additionally, the platform offers a dashboard and API documentation to make inte
 
 ## 	Dataflow Diagram
 
+### Level 0: Context Diagram  
+The Context Diagram presents a high-level view of the 2FA platform and its interactions with external entities.  The primary users include ***Business Users***, who register, log in, and manage API keys; ***Business Applications***, which integrate 2FA functionalities; ***End Users***, who interact with 2FA through OTPs or QR codes; and ***Developers***, who access API documentation.  The 2FA Platform serves as the central system, handling user authentication, OTP generation, and validation. Data stores, such as the Business Database (storing business details and API keys) and the TOTP Secrets Database (securely storing encrypted TOTP secrets), support these interactions.  Key data flows include registration and login requests, API requests for OTP validation, QR code generation, and access to API documentation.  
+
 ![Dataflow Diagram level 0](docs/Level-0-DFD.png)  
 
+### Level 1: High-Level Overview  
+At a more detailed level, the system is broken down into five main processes: ***Business Registration & Login***, which handles account creation and authentication; ***API Key Management***, responsible for generating and managing API keys; ***TOTP Management***, which deals with QR code generation, OTP validation, and TOTP secret management; ***Usage Logs***, which track 2FA activity for security and analytics; and ***Dashboard & API Docs***, which provide a user interface and documentation access. The Business Database and TOTP Secrets Database continue to support these processes, ensuring secure and efficient handling of business credentials, API keys, and TOTP secrets.  Data flows at this level specify how different system components interact, such as a business user generating an API key or an end user scanning a QR code.  
+
 ![Dataflow Diagram level 1](docs/Level-1-DFD.png)  
+
+### Level 2: Detailed View  
+At the most detailed level, each key process is further expanded to outline specific workflows and data exchanges.  ***Register Business*** & ***Authenticate Business*** show how business users register and authenticate using email and password credentials, storing data in the Business Database.  ***Generate API key*** outlines how business users request, generate, and retrieve API keys for integrating the 2FA system into their applications. ***Generate QR Code*** & ***Validate OTP*** covers the generation of QR codes, secure storage of TOTP secrets, and OTP validation by end users.  Data flows illustrate how the TOTP Secrets Database is accessed for encrypting and retrieving stored secrets during authentication. This level provides a granular view of the authentication process, ensuring the secure and efficient implementation of 2FA.
 
 ![Dataflow Diagram level 2](docs/Level-2-DFD.png)  
 
