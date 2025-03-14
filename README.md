@@ -395,11 +395,72 @@ Kanban's flexibility and transparency allowed us to manage work efficiently whil
 * Trello board link - https://trello.com/b/L7dyKFHE/fortikey
 
 
-[Back to Top](#table-of-contents)
+## Project Management
 
-### Planning
+### Team Member Skills and Strengths
 
-#### Week 1
+#### Nathan Keen
+**Technical Strengths:**
+- Backend development expertise
+- Strong understanding of authentication mechanisms
+- Experience with Node.js and Express
+- Security-focused development approach
+- API design and implementation
+
+**Primary Responsibilities:**
+- Backend architecture design
+- Authentication and security implementation
+- API endpoint development
+- Database schema design
+- Backend testing and security hardening
+
+#### Kenny Hefford
+**Technical Strengths:**
+- Strong frontend development skills
+- Experience with React and modern JavaScript frameworks
+- Expertise in UI/UX design
+- Proficient in creating responsive web applications
+
+**Primary Responsibilities:**
+- Frontend architecture design
+- React component development
+- UI/UX implementation
+- Wireframe creation
+- Frontend testing and performance optimization
+
+### Delegation Strategy
+
+#### 1. Skill-Based Task Allocation
+We utilized a collaborative approach that aligned tasks with each team member's core competencies:
+
+- **Backend Tasks:** Primarily assigned to Nathan
+  - Developing authentication services
+  - Implementing 2FA logic
+  - Creating API endpoints
+  - Setting up database interactions
+
+- **Frontend Tasks:** Primarily assigned to Kenny
+  - Designing and implementing React components
+  - Creating responsive layouts
+  - Developing the dashboard UI
+  - Implementing data visualization components
+
+#### 2. Kanban Methodology with Trello
+
+We used Trello with the Kanban methodology to streamline task management and keep the workflow organized. Our board structure included:
+
+- **Backlog:** Unassigned tasks awaiting prioritization
+- **To Do:** Tasks ready for development, assigned to specific team members
+- **Doing:** Active work in progress
+- **Peer Review:** Tasks awaiting code review
+- **Testing:** Quality assurance stage
+- **Complete:** Finished and merged tasks
+
+**Trello Board Link:** https://trello.com/b/L7dyKFHE/fortikey
+
+##### Project Timeline Documentation
+
+###### Week 1
 ![Trello board Start](docs/TrelloW1-1.png)
 ![Trello card Screenshots](docs/TrelloW1-2.png)
 ![Trello card Description](docs/TrelloW1-3.png)
@@ -407,32 +468,94 @@ Kanban's flexibility and transparency allowed us to manage work efficiently whil
 ![Trello card DFD](docs/TrelloW1-5.png)
 ![Trello cards midway through](docs/TrelloW1-6.png)
 
-#### Week 2
+###### Week 2
 ![Trello card User Stories](docs/TrelloW2-1.png)
 ![Trello card Wireframes](docs/TrelloW2-2.png)
 ![Trello cards end of week 2](docs/TrelloW2-3.png)
 
-#### Week 3
+###### Week 3
 ![Trello card Submitting Checklist](docs/TrelloW3-1.png)
 ![Trello cards end of project planning stage](docs/TrelloW3-2.png)
 
-### Development
+###### Week 4
+![DB setup](docs/trello4.png)  
+![Backend setup](docs/trello6.png)  
+![Project Setup](docs/trello1.png)  
 
-#### Week 4
-![DB setup](docs/trello4.png)
-![Backend setup](docs/trello6.png)
-![alt text](docs/trello1.png)
+###### Week 5 
+![Usage analytics](docs/trello2.png)  
+![Security Implementation](docs/trello3.png)  
+![Folder Structure](docs/trello5.png)  
 
-#### Week 5
-![Usage analytics](docs/trello2.png)
-![security](docs/trello3.png)
-![folder setup](docs/trello5.png)
+###### Week 6
+![Project Structure](docs/trello8.png)  
+![Testing Phase](docs/trello9.png)  
+![README Documentation](docs/trello10.png)  
+![Final Project View](docs/trello7.png)  
 
-#### Week 6
-![structure view](docs/trello8.png)
-![testing](docs/trello9.png)
-![readme](docs/trello10.png)
-![end view](docs/trello7.png)
+#### 3. Communication and Sync-ups
+
+- **Bi-Weekly Stand-ups:** 15-minute meetings to discuss:
+  - Completed tasks
+  - Current work in progress
+  - Potential blockers
+  - Alignment on project goals
+
+- **Weekly Planning Sessions:** 
+  - Reviewed project progress
+  - Refined task priorities
+  - Adjusted task assignments based on emerging project needs
+
+#### 4. Task Complexity Consideration
+Tasks were evaluated not just by technical domain, but by:
+- Complexity level
+- Estimated time required
+- Interdependencies with other project components
+- Individual team member's current workload
+
+#### 5. Collaborative Overlap
+Despite primary responsibilities, we maintained flexibility:
+- Regular pair programming sessions
+- Code reviews across domains
+- Shared responsibility for integration points
+- Cross-training and knowledge sharing
+
+#### 6. Example Task Delegation Scenario: Two-Factor Authentication Implementation
+
+**Backend (Nathan):**
+- Design TOTP secret generation algorithm
+- Implement OTP validation endpoint
+- Create secure API endpoints for 2FA functionality
+- Develop backup code generation mechanism
+- Implement rate limiting and security middleware
+- Design database schema for storing TOTP-related data
+
+**Frontend (Kenny):**
+- Develop dashboard UI for API key management
+- Create user interface for viewing 2FA usage analytics
+- Implement API integration for fetching 2FA-related data
+- Design frontend components for displaying authentication logs
+- Develop error handling and user feedback mechanisms for 2FA interactions
+
+**Shared Responsibilities:**
+- Define API contract
+- Ensure secure communication between frontend and backend
+- Create comprehensive test coverage
+- Document integration process
+
+#### Adaptability and Continuous Improvement
+Our delegation approach was not rigid but adaptive:
+- Regular retrospectives to assess task allocation effectiveness
+- Willingness to redistribute tasks if bottlenecks emerged
+- Emphasis on individual growth and skill development
+
+#### Evidence of Effective Delegation
+- Consistent project progress
+- High-quality code across frontend and backend
+- Successful integration of complex authentication features
+- Maintained project timeline and milestones
+
+By focusing on individual strengths while maintaining collaborative flexibility, we successfully developed the FortiKey Two-Factor Authentication platform.
 
 [Back to Top](#table-of-contents)
 
