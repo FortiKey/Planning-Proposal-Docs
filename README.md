@@ -551,7 +551,7 @@ The FortiKey backend leverages Node.js with Express to deliver a secure, scalabl
 
 # Frontend Testing Process
 
-The FortiKey frontend implementation includes extensive testing to ensure reliability, functionality, and security. Our testing process leverages industry-standard tools while focusing on both automated testing and user-centered validation.
+The FortiKey frontend implementation includes extensive testing to ensure reliability, functionality, and security. Our testing process leverages industry-standard tools while focusing on both automated testing and user-centered validation. Due to project time constraints only 83.49% coverage was achieved, which is generally accepted in the industry. Heavy focus was placed on usageanalytics.test.jsx as it was the most complex of all components requiring many individual tests as the Usage Analytics index.jsx involved many components compared with the other files.
 
 ### Testing Framework
 
@@ -789,6 +789,8 @@ npx serve -s build
 
 This ensures that the optimized code works as expected in a production environment.
 
+Additionally, it was tested phyiscally once deployed via netlify (also using npm run build) and render for backend implementation.
+
 ### Client User Testing
 
 As this project did not currently have any real world clients we did our own testing. However, this is the process of how we would do client user testing:
@@ -835,3 +837,307 @@ Test Suites: 26 passed, 26 total
 Tests: 152 passed, 152 total
 
 This comprehensive approach to testing ensures that FortiKey delivers a reliable, secure, and user-friendly experience for businesses implementing two-factor authentication.
+
+# Frontend Challenges
+
+During the development of FortiKey's frontend, our team encountered several technical challenges that required thoughtful problem-solving and innovative approaches. Below, we highlight key challenges we faced and how we overcame them with specific code-based solutions.
+
+## Challenge 1: Implementing a Consistent Design System with DRY Principles
+
+**Challenge:** Creating a consistent visual identity across the application while avoiding repetitive color and style definitions throughout the codebase was challenging. We needed a centralized theming system that would maintain visual consistency and make future design changes easier to implement.
+
+**Solution:** We implemented a comprehensive theming solution using theme.js to centralize all design tokens:
+
+```javascript
+// src/theme.js
+export const tokens = () => ({
+  primary: { main: "#ffffff" }, // Primary color (white)
+  secondary: { main: "#007BFF" }, // Secondary color (blue)
+  otherColor: { main: "#F2F4F8" }, // Background color (light gray)
+  neutral: { main: "#21272A" }, // Text color (dark gray/black)
+  text: { primary: "#007BFF", secondary: "#555555" }, // Text colors
+
+  // Colors for data visualization
+  pieChart: {
+    authorized: "#4CAF50", // Green for authorized
+    unauthorized: "#F44336", // Red for unauthorized
+    apiUsage: "#2196F3", // Blue for API usage
+  },
+});
+
+const themeSettings = {
+  palette: {
+    ...tokens(),
+  },
+  typography: {
+    fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+    fontSize: 12,
+    // Typography variants defined here...
+  },
+};
+
+export const theme = createTheme(themeSettings);
+```
+
+This centralized approach allowed us to:
+- Reference consistent colors across all components
+- Easily modify the entire application's appearance by changing one file
+- Create semantic color naming (e.g., `pieChart.authorized` instead of just "green")
+- Apply consistent typography throughout the application
+
+The theme was then imported across the application, ensuring we maintained visual consistency:
+
+```javascript
+// Example usage in a component
+const colors = tokens();
+<Box backgroundColor={colors.otherColor.main}>
+  <Typography color={colors.text.secondary}>
+    Dashboard Overview
+  </Typography>
+</Box>
+```
+
+This significantly reduced code duplication and made our styling more maintainable, directly applying the DRY principle to our design system.
+
+## Challenge 2: Implementing Role-Based Access Control
+
+**Challenge:** We needed to restrict certain parts of the application based on user roles, particularly the Admin Dashboard, which should only be accessible to users with administrative privileges. This required a solution that was both secure and provided good user experience.
+
+**Solution:** We implemented a comprehensive role-based access control system with several layers:
+
+1. First, we created a specialized `AdminRoute` component that acts as a security wrapper:
+
+```javascript
+// src/components/AdminRoute.jsx
+import ProtectedRoute from "./ProtectedRoute";
+import authService from "../services/authservice";
+
+const AdminRoute = ({ children }) => {
+  const adminCheck = async () => {
+    const user = await authService.getCurrentUser();
+    return user?.role === "admin";
+  };
+
+  return (
+    <ProtectedRoute authCheck={adminCheck} redirectPath="/dashboard">
+      {children}
+    </ProtectedRoute>
+  );
+};
+
+export default AdminRoute;
+```
+
+2. We built conditional UI rendering in the Sidebar component to only show admin options to users with the correct role:
+
+```javascript
+// From Sidebar.jsx
+useEffect(() => {
+  // Check if the user has admin role
+  const checkUserRole = async () => {
+    try {
+      setLoading(true);
+      const user = await authService.getCurrentUser();
+
+      // Check for admin role
+      setIsFortiKeyUser(user?.role === "admin");
+
+      // Still keep company name for display
+      const userOrg = user?.organization || user?.company || "";
+      setCompanyName(userOrg || "Company Name");
+    } catch (error) {
+      console.error("Error checking user role:", error);
+      setIsFortiKeyUser(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  checkUserRole();
+}, []);
+
+// Later in the component, conditionally adding menu items
+const menuItems = [
+  // Base menu items...
+];
+
+// Add Admin Dashboard item only for FortiKey users
+if (isFortiKeyUser) {
+  menuItems.push({
+    title: "Admin",
+    to: "/admindashboard",
+    icon: <SupervisorAccountOutlinedIcon />,
+  });
+}
+```
+
+3. We also implemented the same pattern in the Dashboard component to ensure consistent role-based UI:
+
+```javascript
+// From Dashboard.jsx
+const baseButtons = [
+  // Base navigation buttons...
+];
+
+// Add admin button only for FortiKey users
+const navButtons = isFortiKeyUser
+  ? [
+      ...baseButtons,
+      {
+        title: "Admin Dashboard",
+        path: "/admindashboard",
+        icon: <AdminPanelSettingsOutlinedIcon sx={{ fontSize: 40 }} />,
+        color: colors.neutral.main,
+      },
+    ]
+  : baseButtons;
+```
+
+This multi-layered approach ensured that:
+- Admin functionality is only visible to users with appropriate permissions
+- Direct URL access to protected routes is prevented
+- The UI adapts dynamically based on user roles
+- Authentication checks happen server-side for security
+
+## Challenge 3: Managing Complex Data Fetching and Analytics Visualization
+
+**Challenge:** The UsageAnalytics page needed to fetch data from multiple API endpoints, handle various error conditions, and transform complex data structures into visualization-friendly formats. We also needed to implement smart caching and refreshing mechanisms to optimize performance while ensuring data accuracy.
+
+**Solution:** We developed a sophisticated data fetching and processing system with thorough error handling, caching, and fallback mechanisms:
+
+```javascript
+// From src/pages/usageanalytics/index.jsx
+const loadChartDataWithPeriod = useCallback(
+  async (type, explicitPeriod, force = false) => {
+    try {
+      setLoading(true);
+      if (force) setRefreshing(true);
+      setError(null);
+
+      // Use the explicit period rather than the state value
+      const periodToUse = explicitPeriod || getTimeRangeValue();
+
+      let data = {};
+
+      switch (type) {
+        case "devices": {
+          try {
+            const response = await apiService.getDeviceBreakdown(
+              { period: periodToUse },
+              force
+            );
+            const processedData = processDeviceBreakdown(response);
+            data = processedData.deviceTypes || {};
+          } catch (error) {
+            // Fallback to previous data if available
+            if (prevDataRef.current.devices) {
+              data = prevDataRef.current.devices;
+            } else {
+              // Use default data if no fallback available
+              data = getDefaultChartData("devices");
+            }
+          }
+          break;
+        }
+        case "auth": {
+          try {
+            const [totpResponse, backupResponse] = await Promise.all([
+              apiService.getTOTPStats({ period: periodToUse }, force),
+              apiService.getBackupCodeUsage({ period: periodToUse }, force),
+            ]);
+
+            const processedTOTP = processTOTPStats(totpResponse);
+
+            // Try different properties to find the backup count
+            let backupCount = 0;
+            if (backupResponse.backupCount) {
+              backupCount = backupResponse.backupCount;
+            } else if (
+              backupResponse.summary &&
+              backupResponse.summary.backupCodeUses
+            ) {
+              backupCount = backupResponse.summary.backupCodeUses;
+            } else if (
+              backupResponse.summary &&
+              backupResponse.summary.backupCount
+            ) {
+              backupCount = backupResponse.summary.backupCount;
+            } else if (
+              processedTOTP.summary &&
+              processedTOTP.summary.totalBackupCodesUsed
+            ) {
+              // If it's not in the backup response, get it from the TOTP summary
+              backupCount = processedTOTP.summary.totalBackupCodesUsed;
+            }
+
+            const validations = processedTOTP.summary.totalValidations || 0;
+
+            // Make sure standard TOTP doesn't go negative if backupCount > validations
+            const standardTOTP = Math.max(0, validations - backupCount);
+
+            data = {
+              standardTOTP: standardTOTP,
+              backupCodes: backupCount,
+            };
+          } catch (error) {
+            // Fallback mechanism
+            if (prevDataRef.current.auth) {
+              data = prevDataRef.current.auth;
+            } else {
+              data = getDefaultChartData("auth");
+            }
+          }
+          break;
+        }
+        // Other cases...
+      }
+
+      // Store data for fallback
+      prevDataRef.current[type] = data;
+
+      // Update chart data
+      setChartData(data);
+
+      // Update last refresh time
+      setLastRefreshTime(new Date());
+    } catch (error) {
+      setError(
+        "Unable to load analytics data. " +
+          (error.message || "Please try again later.")
+      );
+      showErrorToast("Failed to load analytics data");
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  },
+  [
+    getTimeRangeValue,
+    setLoading,
+    setRefreshing,
+    setError,
+    setLastRefreshTime,
+    showErrorToast,
+  ]
+);
+```
+
+This solution addressed multiple challenges:
+
+1. **Comprehensive Error Handling:** Each API request was wrapped in try/catch blocks with specific error handling logic.
+
+2. **Data Caching:** The implementation used `useRef` to store previous successful requests, enabling fallback to cached data when API calls fail.
+
+3. **Data Normalization:** The code handled various API response formats and inconsistencies, extracting the required data regardless of the structure.
+
+4. **Parallel Requests:** For some chart types, multiple API calls were made concurrently using `Promise.all` to optimize loading time.
+
+5. **Default Data Handling:** Each chart type had sensible default values when no data was available, preventing broken UI elements.
+
+6. **User Feedback:** Loading states, error messages, and success toasts kept users informed about the status of their data requests.
+
+7. **Optimistic Updates:** The UI was updated optimistically during data refresh operations, enhancing perceived performance.
+
+By implementing this comprehensive approach to data fetching and visualization, we created a reliable analytics dashboard that provides valuable insights while handling error conditions and maintaining a smooth user experience. Extensively testing this file was a big focus as this page is extremely complex involving multiple components and consistently had errors. 
+
+Through these solutions, we successfully addressed critical development challenges in the FortiKey frontend, creating a secure, consistent, and user-friendly 2FA management system.
