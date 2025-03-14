@@ -3,6 +3,7 @@
  ### Table of Contents:
 
 - [Team Members](#team-members)
+- [Links to Work](#links-to-work)
 - [Discription](#description)
     - [Purpose](#purpose)
     - [Functionality/Features](#functionality--features)
@@ -14,11 +15,21 @@
 - [User Stories](#user-stories)
 - [Design](#design)
 - [Project Management](#project-management)
+- [Frontend Libraries](#frontend-libraries-and-technologies)
+- [Backend Libraries](#backend-libraries-and-technologies)
 
 ### Team members
 
 - Nathan Keen
 - Kenny Hefford
+
+## Links to Work
+The link to the FortiKey Website  
+- https://fortikey.netlify.app/
+
+GitHub Repositiories
+- https://github.com/FortiKey
+
 
 ## Description
 
@@ -358,6 +369,7 @@ Kanban's flexibility and transparency allowed us to manage work efficiently whil
 
 * Trello board link - https://trello.com/b/L7dyKFHE/fortikey
 
+## Planning
 ### Week 1
 ![Trello board Start](docs/TrelloW1-1.png)  
 
@@ -382,6 +394,29 @@ Kanban's flexibility and transparency allowed us to manage work efficiently whil
 ![Trello card Submitting Checklist](docs/TrelloW3-1.png)  
 
 ![Trello cards end of project planning stage](docs/TrelloW3-2.png)
+
+## Developement
+### Week 4
+![DB setup](docs/trello4.png)  
+
+![Backend setup](docs/trello6.png)  
+
+![alt text](docs/trello1.png)
+### Week 5
+
+![Usage analytics](docs/trello2.png)    
+
+[security](docs/trello3.png)  
+
+![folder setup](docs/trello5.png)  
+### Week 6
+![structure view](docs/trello8.png)
+
+![testing](docs/trello9.png)  
+
+![readme](docs/trello10.png)  
+
+![end view](docs/trello7.png)  
 
 - [Back to Top](#table-of-contents)
 
