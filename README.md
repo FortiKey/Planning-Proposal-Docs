@@ -384,3 +384,164 @@ Kanban's flexibility and transparency allowed us to manage work efficiently whil
 ![Trello cards end of project planning stage](docs/TrelloW3-2.png)
 
 - [Back to Top](#table-of-contents)
+
+
+
+# Frontend Libraries and Technologies  
+
+The FortiKey frontend is built with a modern React stack, utilizing several key libraries to create a responsive, feature-rich, and secure user interface for managing 2FA.  
+
+## Core Libraries  
+
+### React (v19.0.0)  
+- **Purpose**: Core frontend framework providing the foundation for our single-page application.  
+- **Implementation**: Powers all UI components, state management, and rendering logic.  
+- **Benefits**: Enables component reusability, efficient DOM updates, and a modular codebase.  
+
+### React Router (v6.29.0)  
+- **Purpose**: Manages navigation and routing between different views.  
+- **Implementation**: Handles routes for dashboard, login, registration, API documentation, and settings pages.  
+- **Benefits**: Creates seamless transitions between pages without full page reloads.  
+
+### Axios (v1.8.1)  
+- **Purpose**: Facilitates HTTP requests to the backend API.  
+- **Implementation**: Manages all data fetching, authentication requests, and API key operations.  
+- **Benefits**: Provides consistent error handling, request/response interceptors, and Promise-based syntax.  
+
+## UI Framework  
+
+### Material UI (v6.4.5)  
+- **Purpose**: Comprehensive UI component library based on Google's Material Design.  
+- **Components Used**:  
+  - Core components (`@mui/material`)  
+  - Icon set (`@mui/icons-material`)  
+  - Data Grid (`@mui/x-data-grid`) for displaying usage logs and API keys  
+  - Emotion styling engine (`@emotion/react`, `@emotion/styled`)  
+- **Benefits**: Provides professional, accessible, and responsive components that maintain visual consistency.  
+
+### React Pro Sidebar (v0.7.1)  
+- **Purpose**: Creates the dashboard's navigation sidebar.  
+- **Implementation**: Implements collapsible, responsive navigation for dashboard sections.  
+- **Benefits**: Enhances dashboard usability with intuitive navigation patterns.  
+
+## Data Visualization  
+
+### Chart.js (v4.4.8) with React-Chartjs-2 (v5.3.0)  
+- **Purpose**: Creates interactive data visualizations for analytics.  
+- **Implementation**: Displays 2FA usage trends, security metrics, and account activity.  
+- **Benefits**: Helps businesses visualize and understand their authentication patterns and security status.  
+
+## Specialized Components  
+
+### React Syntax Highlighter (v15.6.1)  
+- **Purpose**: Provides code formatting and highlighting.  
+- **Implementation**: Used in API documentation to display code examples with proper syntax highlighting.  
+- **Benefits**: Improves readability of API integration examples for developers.  
+
+## Testing Framework  
+
+### Jest with React Testing Library  
+- **Purpose**: Comprehensive testing framework for React applications.  
+- **Implementation**:  
+  - **Jest** as the test runner and assertion library.  
+  - **React Testing Library** (`@testing-library/react` v16.2.0) for component testing.  
+  - **User Event** (`@testing-library/user-event` v14.6.1) for simulating user interactions.  
+  - **DOM Testing Library** (`@testing-library/dom` v10.4.0) for DOM queries.  
+  - **Jest DOM** (`@testing-library/jest-dom` v6.6.3) for custom DOM matchers.  
+- **Benefits**: Ensures UI reliability through unit and integration tests, with configured test coverage reporting.  
+- **Configuration**: Custom configuration for test matching patterns, module name mapping, and transform ignore patterns.  
+
+## Development and Performance  
+
+### Web Vitals (v2.1.4)  
+- **Purpose**: Library for measuring real user performance metrics.  
+- **Implementation**: Tracks Core Web Vitals and other performance metrics.  
+- **Benefits**: Helps monitor and improve application performance and user experience. 
+
+# Backend Libraries and Technologies
+
+The FortiKey backend leverages Node.js with Express to deliver a secure, scalable 2FA platform. Based on your `package.json`, here's a detailed breakdown of the backend technologies used:
+
+## Core Framework
+**Express (v4.21.2)**
+- **Purpose:** Fast, unopinionated web framework for Node.js  
+- **Implementation:** Handles routing, middleware integration, and request processing  
+- **Benefits:** Provides a minimal yet powerful structure for building APIs with excellent performance  
+
+## Authentication & Security
+**JSON Web Tokens (`jsonwebtoken` v9.0.2)**
+- **Purpose:** Securely transmit information between parties as a JSON object  
+- **Implementation:** Used for business authentication and API authorization  
+- **Benefits:** Enables stateless authentication with digital signature verification  
+
+**Bcrypt (v5.1.1)**
+- **Purpose:** Password hashing library  
+- **Implementation:** Securely stores user passwords and sensitive credentials  
+- **Benefits:** Implements salted hashing with adjustable work factors to remain secure against evolving threats  
+
+**Helmet (v8.0.0)**
+- **Purpose:** Security middleware that sets HTTP headers  
+- **Implementation:** Configures HTTP headers to protect against common web vulnerabilities  
+- **Benefits:** Helps secure Express apps by setting various HTTP headers to prevent attacks like XSS  
+
+### Two-Factor Authentication
+**OTPAuth (v9.3.6)**
+- **Purpose:** One-time password authentication library  
+- **Implementation:** Generates and validates TOTP codes for 2FA  
+- **Benefits:** Provides RFC 4226 (HOTP) and RFC 6238 (TOTP) compliant implementations  
+
+**Crypto (v1.0.1)**
+- **Purpose:** Node.js cryptographic functionality  
+- **Implementation:** Provides cryptographic operations for securing TOTP secrets  
+- **Benefits:** Enables encryption/decryption of sensitive authentication data  
+
+### Database
+**Mongoose (v8.10.1)**
+- **Purpose:** MongoDB object modeling tool  
+- **Implementation:** Defines schemas, performs validation, and handles database operations  
+- **Benefits:** Adds a layer of structure to MongoDB with built-in type casting and validation  
+
+### API Protection & Performance
+**Express Rate Limit (v7.5.0)**
+- **Purpose:** Basic rate-limiting middleware  
+- **Implementation:** Limits repeated requests to endpoints  
+- **Benefits:** Helps protect against brute-force attacks and API abuse  
+
+**CORS (v2.8.5)**
+- **Purpose:** Cross-Origin Resource Sharing middleware  
+- **Implementation:** Enables controlled API access from different domains  
+- **Benefits:** Provides security while allowing legitimate cross-origin requests  
+
+### HTTP Client
+**Axios (v1.7.9)**
+- **Purpose:** Promise-based HTTP client  
+- **Implementation:** Makes HTTP requests to external services or APIs  
+- **Benefits:** Offers an easy-to-use API with automatic transforms for JSON data  
+
+### Logging & Monitoring
+**Winston (v3.17.0)**
+- **Purpose:** Universal logging library  
+- **Implementation:** Records application events, errors, and security incidents  
+- **Benefits:** Provides multiple transports for logs with customizable levels and formats  
+
+### Development & Configuration
+**Dotenv (v16.4.7)**
+- **Purpose:** Loads environment variables from `.env` files  
+- **Implementation:** Manages configuration across different environments  
+- **Benefits:** Keeps sensitive credentials and configuration separate from code  
+
+**Nodemon (v3.1.9)**
+- **Purpose:** Monitors for changes and automatically restarts the server  
+- **Implementation:** Used in development for improved developer experience  
+- **Benefits:** Increases development efficiency with automatic application reloading  
+
+### Testing
+**Jest (v29.7.0)**
+- **Purpose:** JavaScript testing framework  
+- **Implementation:** Runs unit and integration tests with built-in assertion library  
+- **Benefits:** Provides a complete testing solution with mocking, coverage reports, and snapshot testing  
+
+**Supertest (v7.0.0)**
+- **Purpose:** HTTP assertion library  
+- **Implementation:** Tests API endpoints by making HTTP requests  
+- **Benefits:** Simplifies API testing with a fluent API for assertions on HTTP responses  
