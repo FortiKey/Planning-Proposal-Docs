@@ -545,3 +545,293 @@ The FortiKey backend leverages Node.js with Express to deliver a secure, scalabl
 - **Purpose:** HTTP assertion library  
 - **Implementation:** Tests API endpoints by making HTTP requests  
 - **Benefits:** Simplifies API testing with a fluent API for assertions on HTTP responses  
+
+
+
+
+# Frontend Testing Process
+
+The FortiKey frontend implementation includes extensive testing to ensure reliability, functionality, and security. Our testing process leverages industry-standard tools while focusing on both automated testing and user-centered validation.
+
+### Testing Framework
+
+Our application uses the following testing tools, as defined in our package.json:
+
+json
+"devDependencies": {
+  "@testing-library/dom": "^10.4.0",
+  "@testing-library/jest-dom": "^6.6.3",
+  "@testing-library/react": "^16.2.0",
+  "@testing-library/user-event": "^14.6.1",
+  "jest-environment-jsdom": "^29.7.0"
+}
+
+
+This combination provides:
+- **Jest**: As our test runner and assertion library
+- **React Testing Library**: For component testing with a focus on user behavior
+- **Testing Library User Event**: For simulating realistic user interactions
+- **DOM Testing Library**: For querying DOM elements in tests
+
+### Test Organization
+
+Our tests are structured to mirror the application architecture:
+
+- **src/tests/**
+  - **__mocks__/** → Mock implementations for testing
+  - **components/** → Tests for UI components
+  - **context/** → Tests for React context providers
+  - **data/** → Test data fixtures
+  - **pages/** → Tests for page components
+  - **services/** → Tests for API services
+  - **utils/** → Tests for utility functions
+  - **app.test.jsx** → Tests for the main App component
+  - **debug.test.jsx** → Debugging/utility tests
+  - **testHelpers.js** → Testing helper functions
+  - **testUtils.js** → Testing utilities
+  - **testWrappers.jsx** → Test wrapper components
+
+
+This organization ensures comprehensive test coverage across all aspects of the application.
+
+### Local Development Testing
+
+During development, we use React's development server to test in real-time:
+
+bash
+# Start the development server 
+npm start
+
+
+This allows developers to:
+- Immediately see the effects of code changes
+- Test functionality in a development environment
+- Debug issues with React Developer Tools
+- Verify API integrations with backend services
+
+### Running Automated Tests
+
+Our package.json defines specific scripts for running tests:
+
+json
+"scripts": {
+  "test": "react-scripts test",
+  "test:coverage": "react-scripts test --coverage --watchAll=false"
+}
+
+
+These commands enable:
+
+bash
+# Run tests in watch mode during development
+npm test
+
+# Generate a comprehensive coverage report
+npm test:coverage
+
+
+### Example: UsageAnalytics Component Testing
+
+The UsageAnalytics component, one of our most complex UI elements, includes extensive test coverage as demonstrated in usageanalytics.test.jsx. Here are key test scenarios implemented:
+
+1. **Basic Rendering and API Integration**
+   
+javascript
+   test("renders without crashing and makes at least one API call", async () => {
+     await act(async () => {
+       render(
+         <MemoryRouter>
+           <UsageAnalytics />
+         </MemoryRouter>
+       );
+     });
+     
+     // Force effects to run
+     await act(async () => {
+       jest.runAllTimers();
+       await Promise.resolve(); // Flush promises
+     });
+     
+     // Verify that the API call was made
+     expect(apiService.getTOTPStats).toHaveBeenCalled();
+     expect(screen.getByText("Usage Analytics")).toBeInTheDocument();
+   });
+
+
+2. **Interactive Filtering**
+   
+javascript
+   test("changes time period when selection changes", async () => {
+     // Component setup and rendering...
+     
+     // Find the time range select and change value
+     const timeRangeSelect = screen.getByLabelText("Time Range");
+     
+     apiService.getTOTPStats.mockClear();
+     
+     await act(async () => {
+       fireEvent.change(timeRangeSelect, { target: { value: "7" } });
+       jest.runAllTimers();
+       await Promise.resolve();
+     });
+     
+     // Should trigger a new API call
+     expect(apiService.getTOTPStats).toHaveBeenCalled();
+   });
+
+
+3. **Data Visualization Testing**
+   
+javascript
+   test("changes chart type when selection changes", async () => {
+     // Component setup and rendering...
+     
+     // Find the chart type select and change to devices
+     const chartTypeSelect = screen.getByLabelText("Chart Type");
+     
+     apiService.getDeviceBreakdown.mockClear();
+     
+     await act(async () => {
+       fireEvent.change(chartTypeSelect, { target: { value: "devices" } });
+       jest.runAllTimers();
+       await Promise.resolve();
+     });
+     
+     // Should call the device breakdown API
+     expect(apiService.getDeviceBreakdown).toHaveBeenCalled();
+   });
+
+
+4. **User Interaction: Data Refresh**
+   
+javascript
+   test("refreshes data when refresh button is clicked", async () => {
+     // Component setup and rendering...
+     
+     // Clear mock to track next calls
+     apiService.getTOTPStats.mockClear();
+     
+     // Find and click the refresh button
+     const buttonElement = container.querySelector(
+       '[title="Refresh Data"] button'
+     );
+     
+     await act(async () => {
+       buttonElement.click();
+       jest.runAllTimers();
+       await Promise.resolve();
+     });
+     
+     // Now we should expect the API to have been called
+     expect(apiService.getTOTPStats).toHaveBeenCalled();
+   });
+
+
+5. **Error Handling**
+   
+javascript
+   test("handles API error state correctly", async () => {
+     // Set up API to return an error
+     apiService.getTOTPStats.mockRejectedValueOnce(new Error("API Error"));
+     
+     // Component setup and rendering...
+     
+     // Wait for the error alert to appear
+     await waitFor(() => {
+       expect(screen.getByTestId("alert-error")).toBeInTheDocument();
+     });
+     
+     // Error message should contain the error text
+     expect(screen.getByTestId("alert-error").textContent).toContain(
+       "Unable to load analytics data"
+     );
+     
+     // Should show error toast
+     expect(mockShowErrorToast).toHaveBeenCalled();
+   });
+
+
+6. **Loading States**
+   
+javascript
+   test("displays loading state initially", async () => {
+     render(
+       <MemoryRouter>
+         <UsageAnalytics />
+       </MemoryRouter>
+     );
+     
+     // Should show loading indicator initially
+     expect(screen.getByTestId("circular-progress")).toBeInTheDocument();
+     
+     // Complete loading
+     await act(async () => {
+       jest.runAllTimers();
+       await Promise.resolve();
+     });
+     
+     // Loading should disappear
+     expect(screen.queryByTestId("circular-progress")).not.toBeInTheDocument();
+   });
+
+
+### Production Build Verification
+
+Before deployment, we verify our production build:
+
+bash
+# Generate production-optimized build
+npm run build
+
+# Serve the production build locally for testing
+npx serve -s build
+
+
+This ensures that the optimized code works as expected in a production environment.
+
+### Client User Testing
+
+As this project did not currently have any real world clients we did our own testing. However, this is the process of how we would do client user testing:
+
+1. **Guided Feature Walkthroughs**
+   - Demonstrated key features to client representatives
+   - Gathered feedback on usability and workflow efficiency
+   - Identified areas for improvement based on client needs
+
+2. **Task-Based Testing**
+   - Asked clients to perform specific tasks (generating API keys, viewing analytics)
+   - Observed their interactions and pain points
+   - Made iterative improvements based on observations
+
+3. **Production Environment Testing**
+   - Provided access to staging environments for client testing
+   - Collected feedback through structured forms
+   - Prioritized fixes and enhancements based on client input
+
+
+## Test Coverage Results for Frontend
+
+| File | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s |
+|------|---------|----------|---------|---------|-------------------|
+| All files | 83.49 | 58.11 | 84.81 | 84.41 | |
+| src | 100 | 100 | 100 | 100 | |
+| src/App.js | 100 | 100 | 100 | 100 | |
+| src/pages/apidocumentation | 81.81 | 100 | 33.33 | 81.81 | |
+| src/pages/apidocumentation/index.jsx | 81.81 | 100 | 33.33 | 81.81 | 48,163 |
+| src/pages/landing | 80 | 100 | 66.66 | 80 | |
+| src/pages/landing/index.jsx | 80 | 100 | 66.66 | 80 | 65,238 |
+| src/pages/usageanalytics | 84.61 | 63.07 | 92 | 85.45 | |
+| src/pages/usageanalytics/index.jsx | 84.61 | 63.07 | 92 | 85.45 | 115,135,145,151,166,198-200,216-235,242,265,283-287,392,597-601 |
+| src/pages/viewaccounts | 81.33 | 55.88 | 84.61 | 82.43 | |
+| src/pages/viewaccounts/index.jsx | 81.33 | 55.88 | 84.61 | 82.43 | 68,108-109,172-210 |
+| src/services | 85.41 | 49.45 | 100 | 85.41 | |
+| src/services/apiservice.js | 85.41 | 49.45 | 100 | 85.41 | 105,120,138,154,174,190,208,267,280-283,308,319-320,342,360,380,391-392,410,445 |
+| src/tests | 64.28 | 75 | 42.85 | 75 | |
+| src/tests/testUtils.js | 64.28 | 75 | 42.85 | 75 | 20,75,91 |
+
+## Test Summary
+
+Test Suites: 26 passed, 26 total
+Tests: 152 passed, 152 total
+
+This comprehensive approach to testing ensures that FortiKey delivers a reliable, secure, and user-friendly experience for businesses implementing two-factor authentication.
